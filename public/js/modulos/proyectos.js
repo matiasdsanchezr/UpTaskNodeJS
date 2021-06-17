@@ -6,7 +6,6 @@ const btnEliminar = document.querySelector('#eliminar-proyecto');
 if (btnEliminar) {
     btnEliminar.addEventListener('click', (e) => {
         const urlProyecto = e.target.dataset.proyectoUrl;
-        console.log(urlProyecto);
         Swal.fire({
             title: 'Desea borrar este proyecto?',
             text: "Un proyecto eliminado no se puede recuperar!",
@@ -24,7 +23,7 @@ if (btnEliminar) {
                         Swal.fire({
                             icon: 'success',
                             title: respuesta.data,
-                        }).then( () => {
+                        }).then(() => {
                             window.location.href = '/'
                         });
                     })
@@ -33,7 +32,7 @@ if (btnEliminar) {
                             icon: 'error',
                             text: 'No se pudo eliminar el proyecto',
                             title: 'Ocurrió un error'
-                        }).then( () => {});
+                        }).then(() => {});
                     });
             }
         })

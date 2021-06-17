@@ -19,6 +19,8 @@ body {
 .login,
 .crear-cuenta {
     background: #455A64;
+    background: no-repeat url("../img/background.jpg");
+    background-size: auto;
 }
 
 .contenedor-formulario {
@@ -55,6 +57,8 @@ body {
     -moz-box-shadow: 0px 25px 35px -17px rgba(0, 0, 0, 0.56);
     box-shadow: 0px 25px 35px -17px rgba(0, 0, 0, 0.56);
     padding: 3rem;
+    border-radius: 15px;
+    opacity: 0.9;
 }
 
 .campo {
@@ -105,14 +109,23 @@ body {
     line-height: 0;
 }
 
+.boton:disabled {
+    background-color: #666666;
+}
+
 .boton span {
     font-size: 2.2rem;
     margin-left: 20px;
 }
 
-.boton:hover {
+.boton:hover:enabled {
     cursor: pointer;
     background-color: rgb(219, 184, 29)!important;
+}
+
+.boton:hover:disabled {
+    cursor: pointer;
+    background-color: #666666;
 }
 
 .boton.eliminar {

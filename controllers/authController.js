@@ -68,8 +68,8 @@ exports.enviarToken = async(req, res, next) => {
         archivo: "reestablecer-password",
     });
 
-    req.flash('correcto', 'Se envio un mensaje a tu correo')
-    res.redirect('/iniciar-sesion')
+    req.flash("correcto", "Se envio un mensaje a tu correo");
+    res.redirect("/iniciar-sesion");
 };
 
 exports.validarToken = async(req, res, next) => {
@@ -81,19 +81,19 @@ exports.validarToken = async(req, res, next) => {
 
     // Si no se encuentra el token
     if (!usuario) {
-        req.flash("error", "No valido");
+        req.flash("error", "Error al activar la cuenta.");
         res.redirect("/reestablecer");
         return next();
     }
 
-    // Formulario la para generar nuevo password
+    // Mostrar formulario para generar nuevo password
     res.render("resetPassword", {
         nombrePagina: "Reestablecer contraseña",
     });
 };
 
 exports.actualizarPassword = async(req, res, next) => {
-    // Verificar token y fecha de expiracion
+    // Buscar token en DB y verificar fecha de expiracion
     const usuario = await Usuarios.findOne({
         where: {
             token: req.params.token,
@@ -103,23 +103,22 @@ exports.actualizarPassword = async(req, res, next) => {
         },
     });
 
-    // Verificar que el usuario existe
+    // Verificar si se encontro el token en DB
     if (!usuario) {
-        req.flash("error", "No valido");
+        req.flash("error", "Enlace de activacion no valido.");
         res.redirect("/reestablecer");
         return next();
     }
 
+    // Generar hash para la contraseña
     usuario.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
 
+    // Actualizar token y expiracion del usuario
     usuario.token = null;
     usuario.expiracion = null;
-
-    try {
-        await usuario.save();
-    } catch (error) {
-        console.log("Error al registrar en la base de datos.".concat(error));
-    }
+    await usuario.save().catch((error) => {
+        console.log("Error al escribir en la base de datos.".concat(error));
+    });
 
     req.flash("correcto", "Contraseña reestablecida correctamente");
     res.redirect("/iniciar-sesion");

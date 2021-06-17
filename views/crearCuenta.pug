@@ -12,15 +12,20 @@ html(lang="en")
                         each error in mensajes[categoria]
                             .alerta(class=`${categoria}`)
                                 p= error
-                                
-            form#formulario.caja.caja-login(method="POST" action="/crear-cuenta")
+
+            form#formulario.caja.caja-login.signup(method="POST" action="/crear-cuenta")
                 .campo
                     label(for="email") E-mail:
-                    input(type="text" name="email" placeholder="Tu Email" value= email )
+                    input#email(type="text" name="email" placeholder="" value= email )
                 .campo
-                    label(for="password") Password:
-                    input(type="password" name="password" placeholder="Tu Password" value= password )
+                    label(for="password") Contraseña:
+                    input#password(type="password" name="password" placeholder="" value= password )
+                .campo
+                    label(for="confirm-password") Confirmar contraseña:
+                    input#confirm-password(type="password" name="confirm-password" placeholder="" value= password )
                 .campo.enviar
                     input.boton(type="submit" value="Crear Cuenta")
                 .campo
                     a(href="/iniciar-sesion") Volver a Iniciar Sesión
+
+    script(src="/dist/bundle.js") 

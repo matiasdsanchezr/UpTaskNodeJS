@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 
-export const mostrarError = (url) => {
+export const mostrarMensajes = (url) => {
     Swal.fire({
         title: 'Desea borrar este proyecto?',
         text: "Un proyecto eliminado no se puede recuperar!",

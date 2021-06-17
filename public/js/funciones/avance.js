@@ -1,6 +1,5 @@
 export const actualizarAvance = () => {
     const tareas = document.querySelectorAll('li.tarea');
-    console.debug(tareas)
 
     if (tareas.length) {
         const tareasCompletadas = document.querySelectorAll('i.completo');
