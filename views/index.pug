@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    .contenido-principal
+        if(errores) 
+            each error in errores
+                .alerta= error.texto
+        h1 #{nombrePagina}

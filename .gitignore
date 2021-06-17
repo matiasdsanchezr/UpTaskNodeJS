@@ -1,0 +1,5 @@
+config/email.js
+node_modules
+.idea
+.vscode
+variables.env
