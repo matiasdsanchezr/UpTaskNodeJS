@@ -4,10 +4,10 @@ const juice = require("juice");
 const htmlToText = require("html-to-text");
 const util = require("util");
 const emailConfig = require("../config/email");
+const email = require("../config/email");
 
 let transport = nodemailer.createTransport({
-    host: emailConfig.host,
-    port: emailConfig.port,
+    service: "gmail",
     auth: {
         user: emailConfig.user,
         pass: emailConfig.password,
@@ -31,7 +31,7 @@ exports.enviar = async(opciones) => {
         to: opciones.usuario.email,
         subject: opciones.subject,
         text,
-        html
+        html,
     };
 
     const enviarEmail = util.promisify(transport.sendMail, opcionesEmail);
