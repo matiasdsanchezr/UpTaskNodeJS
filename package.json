@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "node ./index.js",
-        "dev": "nodemon ./index.js",
+        "dev": "nodemon -r ./index.js ",
         "watch": "webpack --watch --mode development",
         "dev-start": "concurrently \"npm run dev \" \"npm run watch \" "
     },
@@ -29,6 +29,7 @@
         "express": "^4.17.1",
         "express-session": "^1.17.2",
         "express-validator": "^6.11.1",
+        "find-config": "^1.0.0",
         "html-entities": "^2.3.2",
         "html-to-text": "^8.0.0",
         "install": "^0.13.0",

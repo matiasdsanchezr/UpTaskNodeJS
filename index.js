@@ -5,7 +5,6 @@ const flash = require("connect-flash");
 const session = require("express-session");
 const cookiesParser = require("cookie-parser");
 const passport = require("./config/passport");
-require('dotenv').config({ path: 'variables.env' });
 
 // Herramienta para decodificar entidades html
 const { decode } = require("html-entities");

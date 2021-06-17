@@ -1,27 +1,30 @@
-const Sequelize = require('sequelize');
-const db = require('../config/db');
-const Proyectos = require('./Proyectos');
+const Sequelize = require("sequelize");
+const db = require("../config/db");
+const Proyectos = require("./Proyectos");
 
-const Tareas = db.define('tareas', {
+const Tareas = db.define(
+    "tareas", {
+        id: {
+            type: Sequelize.INTEGER(11),
+            primaryKey: true,
+            autoIncrement: true,
+        },
 
-    id: {
-        type: Sequelize.INTEGER(11),
-        primaryKey: true,
-        autoIncrement: true
-    },
+        tarea: Sequelize.STRING(100),
 
-    tarea: Sequelize.STRING(100),
-
-    estado: Sequelize.INTEGER(1)
-
-}, {
-    hooks: {
-        beforeCreate(tarea) {},
-        validationFailed(instance, options, error) {
-            console.log(error);
-        }
+        estado: Sequelize.INTEGER(1),
+    }, {
+        hooks: {
+            beforeCreate(tarea) {},
+            validationFailed(instance, options, error) {
+                console.log(error);
+            },
+        },
     }
+);
+Tareas.belongsTo(Proyectos, {
+    onDelete: "CASCADE",
+    hooks: true,
 });
-Tareas.belongsTo(Proyectos);
 
 module.exports = Tareas;

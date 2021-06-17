@@ -2,10 +2,8 @@ const Usuarios = require("../models/Usuarios");
 const enviarEmail = require("../handlers/email");
 
 exports.formIniciarSesion = async(req, res) => {
-    const mensajes = req.flash();
     res.render("iniciarSesion", {
-        nombrePagina: "Iniciar sesion en UpTask",
-        mensajes,
+        nombrePagina: "Iniciar sesion en UpTask"
     });
 };
 
@@ -40,6 +38,8 @@ exports.crearCuenta = async(req, res) => {
         req.flash("correcto", "Enviamos un correo, confirma tu cuenta");
         res.redirect("/iniciar-sesion");
     } catch (error) {
+        console.log(error);
+
         // Crear un arreglo con los mensajes de cada error registrado por Sequelize
         req.flash(
             "error",

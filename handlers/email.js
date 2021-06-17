@@ -3,14 +3,14 @@ const pug = require("pug");
 const juice = require("juice");
 const htmlToText = require("html-to-text");
 const util = require("util");
-const emailConfig = require("../config/email");
-const email = require("../config/email");
+require('dotenv').config({ path: require('find-config')('variables.env') })
 
 let transport = nodemailer.createTransport({
-    service: "gmail",
+    host: process.env.NM_HOST,
+    port: process.env.NM_PORT || 25,
     auth: {
-        user: emailConfig.user,
-        pass: emailConfig.password,
+        user: process.env.NM_USER,
+        pass: process.env.NM_PASSWORD,
     },
 });
 
@@ -31,7 +31,7 @@ exports.enviar = async(opciones) => {
         to: opciones.usuario.email,
         subject: opciones.subject,
         text,
-        html,
+        html
     };
 
     const enviarEmail = util.promisify(transport.sendMail, opcionesEmail);

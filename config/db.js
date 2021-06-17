@@ -1,5 +1,6 @@
 const { Sequelize } = require("sequelize");
-require('dotenv').config({ path: 'variables.env' });
+const path = require('path');
+require('dotenv').config({ path: require('find-config')('variables.env') })
 
 // Conectar a la base de datos
 const sequelize = new Sequelize(process.env.DB_URI, {

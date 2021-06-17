@@ -40,7 +40,7 @@ const Usuarios = db.define(
 
         activo: {
             type: Sequelize.INTEGER,
-            defaultValue: 0
+            defaultValue: 0,
         },
 
         token: {
@@ -70,6 +70,9 @@ Usuarios.prototype.verificarPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-Usuarios.hasMany(Proyectos);
+Usuarios.hasMany(Proyectos, {
+    onDelete: "CASCADE",
+    hooks: true,
+});
 
 module.exports = Usuarios;

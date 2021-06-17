@@ -43,7 +43,7 @@ exports.enviarToken = async(req, res, next) => {
     });
 
     // Comprobar si el usuario existe
-    if (usuario == null) {
+    if (!usuario) {
         req.flash("error", "No existe un usuario registrado con ese correo");
         return res.redirect("/reestablecer");
     }
